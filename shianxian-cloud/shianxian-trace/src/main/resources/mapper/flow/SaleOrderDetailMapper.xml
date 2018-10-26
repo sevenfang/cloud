@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shianxian.trace.flow.dao.SaleOrderDetailDao" >
+
+    <!-- 根据销售单id分页查询销售单详情 -->
+    <select id="selectSaleOrderDetailByPage" resultType="com.shianxian.trace.flow.vo.SaleOrderDetailVO">
+        SELECT sod.id AS sale_order_detail_id, sod.sale_num, sod.status, m.id AS material_id, m.material_name, m.standard, c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name
+        FROM t_sale_order_detail sod
+        LEFT JOIN t_sale_order so ON so.id = sod.sale_order_id
+        LEFT JOIN t_material m ON m.id = sod.material_id
+        LEFT JOIN t_category c ON c.id = m.category_id
+        LEFT JOIN t_unit u ON u.id = m.unit_id
+        WHERE sod.sale_order_id = #{saleOrderId}
+    </select>
+
+</mapper>

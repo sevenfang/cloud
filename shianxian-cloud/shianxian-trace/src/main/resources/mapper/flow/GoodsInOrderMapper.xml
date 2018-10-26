@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shianxian.trace.flow.dao.GoodsInOrderDao" >
+
+    <!-- 根据企业id分页查询商品入库单 -->
+    <select id="selectgGodsInOrderByPage" resultType="com.shianxian.trace.flow.vo.GoodsInOrderVO">
+        SELECT o.goods_in_order_no, o.goods_in_order_time, o.process_goods_num, o.process_material_id, o.process_material_no, o.status,
+        m.id AS material_id, m.material_name, m.standard, c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name
+        FROM t_goods_in_order o
+        LEFT JOIN t_material m ON m.id = o.material_id
+        LEFT JOIN t_category c ON c.id = m.category_id
+        LEFT JOIN t_unit u ON u.id = m.unit_id
+        WHERE o.company_id = #{companyId}
+    </select>
+
+</mapper>

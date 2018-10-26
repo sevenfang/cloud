@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shianxian.trace.base.dao.ProcessTemplateDetailDao" >
+
+    <!-- 根据模板id分页查询模板详情 -->
+    <select id="selectProcessTemplateItemByPage" resultType="com.shianxian.trace.base.vo.ProcessTemplateDetailVO">
+        SELECT m.id, m.material_name, c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name, pti.process_template_num
+        FROM t_process_template_detail pti
+        LEFT JOIN t_process_template pt ON pt.id = pti.process_template_id
+        LEFT JOIN t_material m ON m.id = pti.material_id
+        LEFT JOIN t_category c ON c.id = pti.category_id
+        LEFT JOIN t_unit u ON u.id = pti.unit_id
+        WHERE pti.process_template_id = #{processTemplateId}
+    </select>
+
+</mapper>

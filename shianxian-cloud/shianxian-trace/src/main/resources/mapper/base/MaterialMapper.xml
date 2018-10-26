@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shianxian.trace.base.dao.MaterialDao" >
+
+    <select id="selectMaterialByPage" resultType="com.shianxian.trace.base.vo.MaterialVO" parameterType="com.shianxian.trace.base.pojo.Material">
+        SELECT m.id, m.material_name, m.nation_code, m.nation_name, m.is_product, m.standard, m.images, m.num,
+        c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name
+        FROM t_material m
+        INNER JOIN t_category c ON c.id = m.category_id
+        INNER JOIN t_unit u ON u.id = m.unit_id
+        <where>
+            <if test="material.materialType != null">
+                AND m.material_type = #{material.materialType}
+            </if>
+            <if test="material.companyId != null">
+                AND m.company_id = #{material.companyId}
+            </if>
+        </where>
+    </select>
+
+</mapper>
