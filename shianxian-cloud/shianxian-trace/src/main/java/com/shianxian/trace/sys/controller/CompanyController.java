@@ -46,10 +46,10 @@ public class CompanyController {
     @RequiresPermissions(value = {"system:company:save", "system:company:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改企业接口", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "企业id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "id", value = "企业id", dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "name", value = "企业名称", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "shortName", value = "企业简称", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "companyCode", value = "企业节点码", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "shortName", value = "企业简称", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "companyCode", value = "企业节点码", dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "traceCode", value = "追溯节点码", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "address", value = "经营地址", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "code", value = "统一社会代码/证件号码", required = true, dataType = "String"),
@@ -59,11 +59,11 @@ public class CompanyController {
             @ApiImplicitParam(paramType="query", name = "companyType", value = "企业类型", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "territory", value = "经营领域", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "business", value = "主营业务", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "scope", value = "经营范围", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "province", value = "省", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "city", value = "市", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "area", value = "区", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "enable", value = "是否有效  1：有效  0：无效。默认有效", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "scope", value = "经营范围", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "province", value = "省", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "city", value = "市", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "area", value = "区", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "enable", value = "是否有效  1：有效  0：无效。默认有效", dataType = "int")
     })
     public ResponseEntity<Object> saveOrUpdateCompany(@Valid Company company, BindingResult result) {
         try {
@@ -72,7 +72,7 @@ public class CompanyController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存、修改企业错误！", e);
+            log.error("保存、修改企业错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存、修改企业错误！"));
     }
@@ -89,8 +89,8 @@ public class CompanyController {
     @ApiOperation(value="查询企业信息", notes="根据用户id查询企业信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "id", value = "用户id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectByUserId(Page page, User user) {
         if (user.getId() == null) {
@@ -120,7 +120,7 @@ public class CompanyController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除企业错误！", e);
+            log.error("删除企业错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除企业错误！"));
     }

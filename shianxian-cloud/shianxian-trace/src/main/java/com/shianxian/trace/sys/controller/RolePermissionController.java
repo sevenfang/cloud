@@ -56,7 +56,7 @@ public class RolePermissionController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存或修改角色所拥有的权限错误！", e);
+            log.error("保存或修改角色所拥有的权限错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存或修改角色所拥有的权限错误！"));
     }
@@ -83,7 +83,7 @@ public class RolePermissionController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除角色所拥有的权限错误！", e);
+            log.error("删除角色所拥有的权限错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除角色所拥有的权限错误！"));
     }

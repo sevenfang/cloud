@@ -46,9 +46,9 @@ public class RoleController {
     @RequiresPermissions(value = {"system:role:save", "system:role:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改角色接口", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "角色id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "id", value = "角色id", dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "roleName", value = "角色名称", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "description", value = "角色描述", required = false, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "description", value = "角色描述", dataType = "String")
     })
     public ResponseEntity<Object> saveOrUpdateRole(@Valid Role role, BindingResult result) {
         try {
@@ -59,7 +59,7 @@ public class RoleController {
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(ResultUtils.setMsg("角色名已存在，不可用！"));
             }
         } catch (Exception e) {
-            log.error("保存角色错误！", e);
+            log.error("保存角色错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存角色错误！"));
     }
@@ -85,7 +85,7 @@ public class RoleController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除角色错误！", e);
+            log.error("删除角色错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除角色错误！"));
     }
@@ -101,8 +101,8 @@ public class RoleController {
     @RequiresPermissions("system:role:select")
     @ApiOperation(value="分页查询角色", notes="分页查询角色信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectRoleByPage(Page page) {
         try {
@@ -111,7 +111,7 @@ public class RoleController {
                 return ResponseEntity.ok(roleList);
             }
         } catch (Exception e) {
-            log.error("分页查询角色失败！", e);
+            log.error("分页查询角色失败！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("分页查询角色失败！"));
     }

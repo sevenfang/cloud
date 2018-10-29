@@ -45,18 +45,19 @@ public class PurchaseInOrderController {
     @RequiresPermissions(value = {"flow:purchaseInOrder:save", "flow:purchaseInOrder:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改采购入库单", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "采购入库单id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "purchaseInOrderNo", value = "采购入库单号", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "materialInTime", value = "原料入库日期", required = false, dataType = "Date"),
-            @ApiImplicitParam(paramType="query", name = "status", value = "审核状态。1：待审核，2：审核中，3：审核通过", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "id", value = "采购入库详情id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "supplierInOrderNo", value = "供应商采购入库单号，为供应商自己的进货单号", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "purchaseInOrderNum", value = "采购入库的物料数量", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "materialId", value = "物料id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "categoryId", value = "物料类别id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "unitId", value = "计量单位id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "supplierId", value = "供应商id", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="header", name = "id", value = "采购入库单id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "companyId", value = "企业id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "purchaseInOrderNo", value = "采购入库单号", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "materialInTime", value = "原料入库日期", dataType = "Date"),
+            @ApiImplicitParam(paramType="header", name = "status", value = "审核状态。1：待审核，2：审核中，3：审核通过", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "id", value = "采购入库详情id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "supplierInOrderNo", value = "供应商采购入库单号，为供应商自己的进货单号", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "purchaseInOrderNum", value = "采购入库的物料数量", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "supplierId", value = "供应商id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "quarantineNo", value = "检疫证号", dataType = "String")
     })
     public ResponseEntity<Object> saveOrUpdatePurchaseInOrder(@RequestBody @Valid PurchaseInOrder purchaseInOrder, BindingResult result) {
         try {
@@ -65,7 +66,7 @@ public class PurchaseInOrderController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存、修改采购入库单错误！", e);
+            log.error("保存、修改采购入库单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存、修改采购入库单错误！"));
     }
@@ -90,7 +91,7 @@ public class PurchaseInOrderController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除采购入库单错误！", e);
+            log.error("删除采购入库单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除采购入库单错误！"));
     }
@@ -107,8 +108,8 @@ public class PurchaseInOrderController {
     @ApiOperation(value="查询采购入库单接口", notes="根据采购入库单id查询采购入库单")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectPurchaseInOrderByPage(Page page, PurchaseInOrder purchaseInOrder) {
         try {
@@ -120,7 +121,7 @@ public class PurchaseInOrderController {
                 return ResponseEntity.ok(purchaseInOrderList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询采购入库单错误！", e);
+            log.error("根据企业id分页查询采购入库单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询采购入库单错误！"));
     }
@@ -137,8 +138,8 @@ public class PurchaseInOrderController {
     @ApiOperation(value="查询采购入库单详情接口", notes="根据采购入库单id查询采购入库单详情")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "purchaseInOrderId", value = "采购入库单id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectPurchaseInOrderDetailByPage(Page page, PurchaseInOrderDetail purchaseInOrderDetail) {
         try {
@@ -150,7 +151,7 @@ public class PurchaseInOrderController {
                 return ResponseEntity.ok(purchaseInOrderDetailVOList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询采购入库单错误！", e);
+            log.error("根据企业id分页查询采购入库单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询采购入库单错误！"));
     }

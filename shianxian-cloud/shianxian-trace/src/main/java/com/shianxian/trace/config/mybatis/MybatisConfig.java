@@ -131,7 +131,7 @@ public class MybatisConfig {
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
-            log.error("德鲁伊连接池初始化错误", e);
+            log.error("德鲁伊连接池初始化错误！{}", e.getMessage());
         }
         return datasource;
     }

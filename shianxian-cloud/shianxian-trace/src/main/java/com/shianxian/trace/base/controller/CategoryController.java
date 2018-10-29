@@ -46,20 +46,21 @@ public class CategoryController {
     @RequiresPermissions(value = {"base:category:save", "base:category:update"}, logical = Logical.OR)
     @ApiOperation(value = "保存、修改物料类别接口", notes = "传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "物料类别id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType = "query", name = "id", value = "物料类别id", dataType = "int"),
             @ApiImplicitParam(paramType = "query", name = "companyId", value = "企业id", required = true, dataType = "int"),
             @ApiImplicitParam(paramType = "query", name = "categoryName", value = "物料类别名称", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "categoryType", value = "物料类别分类", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "description", value = "物料类别描述", required = false, dataType = "String")
+            @ApiImplicitParam(paramType = "query", name = "description", value = "物料类别描述", dataType = "String")
     })
     public ResponseEntity<Object> saveOrUpdateCategory(@Valid Category category, BindingResult result) {
         try {
             Integer count = this.categoryService.saveOrUpdateCategory(category);
             if (count != null && count == 1 || (count == 0)) {
+                int i = 0/0;
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存或修改物料类别错误！", e);
+            log.error("保存或修改物料类别错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -85,7 +86,7 @@ public class CategoryController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除物料类别类别错误！", e);
+            log.error("删除物料类别类别错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -102,9 +103,9 @@ public class CategoryController {
     @ApiOperation(value = "查询物料类别接口", notes = "根据企业id分页查询物料类别")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "categoryType", value = "类别分类。1为原料，2为商品", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType = "query", name = "categoryType", value = "类别分类。1为原料，2为商品", dataType = "int"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectCategoryByPage(Page page, Category category) {
         try {
@@ -116,7 +117,7 @@ public class CategoryController {
                 return ResponseEntity.ok(categoryList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询物料类别错误！", e);
+            log.error("根据企业id分页查询物料类别错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询物料类别错误！"));
     }
@@ -142,7 +143,7 @@ public class CategoryController {
                 return ResponseEntity.ok(ResultUtils.setData(c));
             }
         } catch (Exception e) {
-            log.error("根据物料类别id查询物料类别错误！", e);
+            log.error("根据物料类别id查询物料类别错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据物料类别id查询物料类别错误！"));
     }

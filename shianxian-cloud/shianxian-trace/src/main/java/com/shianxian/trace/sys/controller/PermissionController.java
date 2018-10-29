@@ -6,6 +6,7 @@ import com.shianxian.trace.sys.service.PermissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("permission")
 @Api(description = "权限控制器")
+@Slf4j
 public class PermissionController {
 
 
@@ -45,6 +47,7 @@ public class PermissionController {
         if (permissionList != null) {
             return ResponseEntity.ok(permissionList);
         }
+        log.error("根据角色id查询角色权限错误！");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据角色id查询角色权限错误！"));
     }
 }

@@ -51,6 +51,7 @@ public class GoodsOutOrderDetail {
     /**
      * 商品出库数量
      */
+    @NotNull(message = "商品出库数量不能为空！")
     private Integer goodsNum;
 
     /**

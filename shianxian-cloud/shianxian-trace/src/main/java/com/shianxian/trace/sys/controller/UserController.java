@@ -44,8 +44,8 @@ public class UserController {
     @RequiresPermissions("system:user:select")
     @ApiOperation(value="分页查询用户接口", notes="根据用户权限分页查询用户（超级管理员可以查询所有用户，管理员则查询除了超级管理员之外的所有用户，普通用户只能看见自己的子用户）")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectUserByPage(Page page) {
         try {
@@ -54,7 +54,7 @@ public class UserController {
                 return ResponseEntity.ok(userList);
             }
         } catch (Exception e) {
-            log.error("分页查询用户错误！", e);
+            log.error("分页查询用户错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("分页查询用户错误！"));
     }
@@ -68,7 +68,7 @@ public class UserController {
     @PutMapping("/updateUserById")
     @RequiresPermissions("system:user:update")
     @ApiOperation(value="修改用户信息接口", notes="根据id修改用户信息")
-    @ApiImplicitParam(paramType="query", name = "id", value = "用户id", required = false, dataType = "int")
+    @ApiImplicitParam(paramType="query", name = "id", value = "用户id", dataType = "int")
     public ResponseEntity<Object> updateUserById(User user) {
         try {
             if (user.getId() == null) {
@@ -79,7 +79,7 @@ public class UserController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("根据id修改用户信息错误！", e);
+            log.error("根据id修改用户信息错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -96,10 +96,10 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "username", value = "用户名", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "password", value = "密码", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "nickName", value = "昵称", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "companyId", value = "所属企业id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "nickName", value = "昵称", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "companyId", value = "所属企业id", dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "isAdmin", value = "是否为管理员  1：有效  0：无效", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "enable", value = "是否有效  1：有效  0：无效。默认有效", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "enable", value = "是否有效  1：有效  0：无效。默认有效", dataType = "int")
     })
     public ResponseEntity<Object> saveUser(@Valid User user, BindingResult result) {
         try {
@@ -110,7 +110,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(ResultUtils.setMsg("用户名已存在，不可用！"));
             }
         } catch (Exception e) {
-            log.error("保存用户信息错误！", e);
+            log.error("保存用户信息错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -138,7 +138,7 @@ public class UserController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除用户错误！", e);
+            log.error("删除用户错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除用户错误！"));
     }
@@ -170,7 +170,7 @@ public class UserController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("修改密码错误！", e);
+            log.error("修改密码错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("修改密码错误！"));
     }

@@ -55,7 +55,7 @@ public class UserRoleController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存用户角色失败！", e);
+            log.error("保存用户角色失败！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存用户角色失败！"));
     }
@@ -82,7 +82,7 @@ public class UserRoleController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除用户拥有的角色失败！", e);
+            log.error("删除用户拥有的角色失败！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("删除用户拥有的角色失败！"));
     }

@@ -45,18 +45,18 @@ public class ProcessMaterialController {
     @RequiresPermissions("process:material:save")
     @ApiOperation(value="添加物料加工单", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "物料加工单id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "processMaterialNo", value = "物料加工单号", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "processMaterialNum", value = "物料加工数量，-1：加工库存里所有的这个原料", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "materialId", value = "物料id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "categoryId", value = "物料类别id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "unitId", value = "计量单位id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "id", value = "物料加工详情id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "processGoodsNum", value = "加工数量，加工后的商品", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "materialId", value = "物料id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "categoryId", value = "物料类别id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "unitId", value = "计量单位id", required = true, dataType = "int")
+            @ApiImplicitParam(paramType="header", name = "id", value = "物料加工单id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "companyId", value = "企业id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "processMaterialNo", value = "物料加工单号", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "processMaterialNum", value = "物料加工数量，-1：加工库存里所有的这个原料", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "id", value = "物料加工详情id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "processGoodsNum", value = "加工数量，加工后的商品", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int")
     })
     public ResponseEntity<Object> saveProcessMaterial(@RequestBody @Valid ProcessMaterial processMaterial, BindingResult result) {
         try {
@@ -67,7 +67,7 @@ public class ProcessMaterialController {
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(ResultUtils.setMsg("该原料库存不足！"));
             }
         } catch (Exception e) {
-            log.error("添加物料加工单错误！", e);
+            log.error("添加物料加工单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -92,7 +92,7 @@ public class ProcessMaterialController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除物料加工单错误！", e);
+            log.error("删除物料加工单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -109,8 +109,8 @@ public class ProcessMaterialController {
     @ApiOperation(value="分页查询物料加工单接口", notes="根据企业id分页查询物料加工单")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectProcessMaterialByPage(Page page, ProcessMaterial processMaterial) {
         try {
@@ -122,7 +122,7 @@ public class ProcessMaterialController {
                 return ResponseEntity.ok(processMaterialVOList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询物料加工单错误！", e);
+            log.error("根据企业id分页查询物料加工单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询物料加工单错误！"));
     }
@@ -139,8 +139,8 @@ public class ProcessMaterialController {
     @ApiOperation(value="分页查询物料加工单详情", notes="根据物料加工单id分页查询物料加工单详情")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "processMaterialId", value = "物料加工单id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectProcessMaterialDetailByPage(Page page, ProcessMaterialDetail processMaterialDetail) {
         try {
@@ -152,7 +152,7 @@ public class ProcessMaterialController {
                 return ResponseEntity.ok(processMaterialDetailVOList);
             }
         } catch (Exception e) {
-            log.error("根据物料加工单id分页查询物料加工单详情错误！", e);
+            log.error("根据物料加工单id分页查询物料加工单详情错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据物料加工单id分页查询物料加工单详情错误！"));
     }

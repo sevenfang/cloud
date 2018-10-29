@@ -54,11 +54,11 @@ public class LoginController {
             return ResponseEntity.ok().body(loginUser);
         } catch (LockedAccountException lae) {
             token.clear();
-            log.error("用户已经被锁定不能登录，请与管理员联系！", lae);
+            log.error("用户已经被锁定不能登录，请与管理员联系！{}", lae.getMessage());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ResultUtils.setMsg("用户已经被锁定不能登录，请与管理员联系！"));
         } catch (AuthenticationException e) {
             token.clear();
-            log.error("用户或密码不正确！", e);
+            log.error("用户或密码不正确！{}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResultUtils.setMsg("用户或密码不正确！"));
         }
     }

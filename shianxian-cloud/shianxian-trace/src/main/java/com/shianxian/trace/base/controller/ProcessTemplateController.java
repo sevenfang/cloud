@@ -47,16 +47,16 @@ public class ProcessTemplateController {
     @RequiresPermissions(value = {"base:processTemplate:save", "base:processTemplate:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改加工模板接口", notes="以json格式提交，传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "加工模板id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "materialId", value = "物料id，此物料为原料", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "processTemplateName", value = "加工模板名称", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "processTemplateDetails", value = "加工模板详情集合", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "id", value = "加工模板明细id", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "categoryId", value = "物料类别id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "unitId", value = "计量单位id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "materialId", value = "物料id，此物料为加工过后的商品", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "processTemplateNum", value = "加工模板数量", required = true, dataType = "int")
+            @ApiImplicitParam(paramType="header", name = "id", value = "加工模板id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "companyId", value = "企业id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id，此物料为原料", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "processTemplateName", value = "加工模板名称", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "processTemplateDetails", value = "加工模板详情集合", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "id", value = "加工模板明细id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id，此物料为加工过后的商品", dataType = "int"),
+            @ApiImplicitParam(paramType="header", name = "processTemplateNum", value = "加工模板数量", dataType = "int")
     })
     public ResponseEntity<Object> saveOrUpdateProcessTemplate(@RequestBody @Valid ProcessTemplate processTemplate, BindingResult result) {
         try {
@@ -65,7 +65,7 @@ public class ProcessTemplateController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存、修改加工模板错误！", e);
+            log.error("保存、修改加工模板错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -88,7 +88,7 @@ public class ProcessTemplateController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除加工模板错误！", e);
+            log.error("删除加工模板错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -105,8 +105,8 @@ public class ProcessTemplateController {
     @ApiOperation(value="分页查询模板", notes="根据企业id分页查询模板")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectProcessTemplateByPage(Page page, ProcessTemplate processTemplate) {
         try {
@@ -118,7 +118,7 @@ public class ProcessTemplateController {
                 return ResponseEntity.ok(processTemplateList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询模板错误！", e);
+            log.error("根据企业id分页查询模板错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询模板错误！"));
     }
@@ -135,8 +135,8 @@ public class ProcessTemplateController {
     @ApiOperation(value="分页查询模板详情", notes="根据模板id分页查询模板详情")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "processTemplateId", value = "加工模板id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectProcessTemplateItemByPage(Page page, ProcessTemplateDetail processTemplateDetail) {
         try {
@@ -148,7 +148,7 @@ public class ProcessTemplateController {
                 return ResponseEntity.ok(materialVOList);
             }
         } catch (Exception e) {
-            log.error("根据模板id分页查询模板详情错误！", e);
+            log.error("根据模板id分页查询模板详情错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据模板id分页查询模板详情错误！"));
     }

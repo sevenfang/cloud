@@ -76,7 +76,7 @@ public class UploadController {
                 return ResponseEntity.ok(ResultUtils.setMsg(fileName));
             }
         } catch (Exception e) {
-            log.error("上传图片错误！", e);
+            log.error("上传图片错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }

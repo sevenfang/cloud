@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -30,36 +32,43 @@ public class GoodsOutOrder extends BasePojo {
     /**
      * 企业id
      */
+    @NotNull(message = "企业id不能为空！")
     private Integer companyId;
 
     /**
      * 商品出库单号
      */
+    @NotEmpty(message = "商品出库单号不能为空！")
     private String goodsOutOrderNo;
 
     /**
      * 商品出库日期
      */
+    @NotNull(message = "商品出库日期不能为空！")
     private Date goodsOutOrderTime;
 
     /**
      * 销售单id
      */
+    @NotNull(message = "销售单id不能为空！")
     private Integer saleOrderId;
 
     /**
      * 销售单号
      */
+    @NotEmpty(message = "销售单号不能为空！")
     private String saleOrderNo;
 
     /**
      * 操作员
      */
+    @NotEmpty(message = "操作员不能为空！")
     private String operatorUser;
 
     /**
      * 发货人
      */
+    @NotEmpty(message = "发货人不能为空！")
     private String consignerUser;
 
     /**

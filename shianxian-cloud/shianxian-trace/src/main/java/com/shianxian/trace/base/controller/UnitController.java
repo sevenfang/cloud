@@ -46,10 +46,10 @@ public class UnitController {
     @RequiresPermissions(value = {"base:unit:save", "base:unit:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改加工模板接口", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "计量单位id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "id", value = "计量单位id", dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "unitName", value = "计量单位名称", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "description", value = "计量单位描述", required = false, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "description", value = "计量单位描述", dataType = "String")
     })
     public ResponseEntity<Object> saveOrUpdateUnit(@Valid Unit unit, BindingResult result) {
         try {
@@ -58,7 +58,7 @@ public class UnitController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存、修改计量单位错误！", e);
+            log.error("保存、修改计量单位错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("保存、修改计量单位错误！"));
     }
@@ -84,7 +84,7 @@ public class UnitController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除计量单位失败！", e);
+            log.error("删除计量单位失败！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -102,8 +102,8 @@ public class UnitController {
     @ApiOperation(value="分页查询计量单位", notes="根据企业id分页查询计量单位")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectUnitByPage(Page page, Unit unit) {
         try {
@@ -115,7 +115,7 @@ public class UnitController {
                 return ResponseEntity.ok(unitList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询计量单位错误！", e);
+            log.error("根据企业id分页查询计量单位错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询计量单位错误！"));
     }
@@ -142,7 +142,7 @@ public class UnitController {
                 return ResponseEntity.ok(ResultUtils.setData(u));
             }
         } catch (Exception e) {
-            log.error("根据计量单位id查询计量单位错误！", e);
+            log.error("根据计量单位id查询计量单位错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据计量单位id查询计量单位错误！"));
     }

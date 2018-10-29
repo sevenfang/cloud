@@ -46,15 +46,15 @@ public class CustomerController {
     @RequiresPermissions(value = {"base:customer:save", "base:customer:update"}, logical = Logical.OR)
     @ApiOperation(value="保存、修改客户接口", notes="传入id就修改，不传入id就添加")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "客户id", required = false, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "id", value = "客户id", dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "customerName", value = "客户名称", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "contacts", value = "联系人", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "tel", value = "联系电话", required = false, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "address", value = "经营地址", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "contacts", value = "联系人", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "tel", value = "联系电话", dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "address", value = "经营地址", dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "customerCode", value = "追溯节点码", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "businessLicense", value = "营业执照/证件号", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "enable", value = "1：有效  0：无效。默认有效", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "enable", value = "1：有效  0：无效。默认有效", dataType = "int")
     })
     public ResponseEntity<Object> saveOrUpdateCustomer(@Valid Customer customer, BindingResult result) {
         try {
@@ -63,7 +63,7 @@ public class CustomerController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("保存、修改客户错误！", e);
+            log.error("保存、修改客户错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -89,7 +89,7 @@ public class CustomerController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("删除客户错误！", e);
+            log.error("删除客户错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
@@ -106,8 +106,8 @@ public class CustomerController {
     @ApiOperation(value="分页查询客户", notes="根据企业id分页查询客户")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectCustomerByPage(Page page, Customer customer) {
         try {
@@ -119,7 +119,7 @@ public class CustomerController {
                 return ResponseEntity.ok(customerList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询客户错误！", e);
+            log.error("根据企业id分页查询客户错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询客户错误！"));
     }

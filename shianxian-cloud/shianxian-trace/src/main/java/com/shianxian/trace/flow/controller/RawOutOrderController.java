@@ -45,8 +45,8 @@ public class RawOutOrderController {
     @ApiOperation(value="分页查询原料出库单接口", notes="根据企业id分页查询原料出库单")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", required = false, dataType = "int")
+            @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "每页查询数量，默认是10", dataType = "int")
     })
     public ResponseEntity<Object> selectRawOutOrderByPage(Page page, RawOutOrder rawOutOrder) {
         try {
@@ -58,7 +58,7 @@ public class RawOutOrderController {
                 return ResponseEntity.ok(rawOutOrderVOList);
             }
         } catch (Exception e) {
-            log.error("根据企业id分页查询原料出库单错误！", e);
+            log.error("根据企业id分页查询原料出库单错误！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.setMsg("根据企业id分页查询原料出库单错误！"));
     }
@@ -86,7 +86,7 @@ public class RawOutOrderController {
                 return ResponseEntity.ok(ResultUtils.successMsg());
             }
         } catch (Exception e) {
-            log.error("根据id改变原料出库单审核状态！", e);
+            log.error("根据id改变原料出库单审核状态！{}", e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResultUtils.errorMsg());
     }
