@@ -10,6 +10,12 @@ import lombok.Data;
 @Data
 public class ProcessTemplateDetailVO extends Material {
 
+
+    /**
+     * 物料id
+     */
+    private Integer materialId;
+
     /**
      * 计量单位名称
      */

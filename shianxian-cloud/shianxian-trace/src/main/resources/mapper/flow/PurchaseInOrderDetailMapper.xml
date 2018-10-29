@@ -4,8 +4,8 @@
 
     <!-- 根据模板id分页查询模板详情 -->
     <select id="selectPurchaseInOrderDetailByPage" resultType="com.shianxian.trace.flow.vo.PurchaseInOrderDetailVO">
-        select m.id, m.material_name, c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name, s.id AS supplier_id, s.supplier_name,
-        p.supplier_in_order_no, p.id AS purchase_in_order_detail_id, p.purchase_in_order_num, p.quarantine_no
+        select m.id AS material_id, m.material_name, c.id AS category_id, c.category_name, u.id AS unit_id, u.unit_name, s.id AS supplier_id, s.supplier_name,
+        p.supplier_in_order_no, pio.id AS purchase_in_order_id, p.purchase_in_order_num, p.quarantine_no
         FROM t_purchase_in_order_detail p
         LEFT JOIN t_purchase_in_order pio ON pio.id = p.purchase_in_order_id
         LEFT JOIN t_material m ON m.id = p.material_id

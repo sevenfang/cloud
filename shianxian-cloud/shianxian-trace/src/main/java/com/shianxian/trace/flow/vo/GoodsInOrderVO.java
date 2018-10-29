@@ -15,6 +15,11 @@ public class GoodsInOrderVO extends Material {
 
 
     /**
+     * 物料id
+     */
+    private Integer materialId;
+
+    /**
      * 商品入库单号
      */
     private String goodsInOrderNo;

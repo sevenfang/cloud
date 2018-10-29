@@ -11,7 +11,7 @@
     <jmxConfigurator/>
 
     <!-- 定义日志文件 输出位置 -->
-    <property name="log.home_dir" value="/home/new_trace/logs/"/>
+    <property name="log.home_dir" value="/home/shianxian-trace/logs/"/>
 
     <!-- 日志最大的历史 30天 -->
     <property name="log.maxHistory" value="30"/>

@@ -11,6 +11,10 @@ import lombok.Data;
 @Data
 public class PurchaseInOrderDetailVO extends Material {
 
+    /**
+     * 物料id
+     */
+    private Integer materialId;
 
     /**
      * 计量单位名称
@@ -35,7 +39,7 @@ public class PurchaseInOrderDetailVO extends Material {
     /**
      * 采购入库单id
      */
-    private Integer purchaseInOrderDetailId;
+    private Integer purchaseInOrderId;
 
     /**
      * 供应商采购入库单号，为供应商自己的进货单号
@@ -51,4 +55,9 @@ public class PurchaseInOrderDetailVO extends Material {
      * 采购入库的物料数量（用来计算库存）
      */
     private Integer purchaseInOrderSurplusNum;
+
+    /**
+     * 检疫证号
+     */
+    private String quarantineNo;
 }

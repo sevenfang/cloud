@@ -1,6 +1,6 @@
 # tomcat
 server:
-  port: 8080
+  port: 8090
   tomcat:
     uri-encoding: UTF-8
 # spring
@@ -69,16 +69,19 @@ spring:
 # eureka
 eurekaServer:
   host: localhost
-  port: 8091
   user: admin
   password: 123456
+  # eureka端口1
+  port1: 8091
+  # eureka端口2
+  port2: 8092
 
 eureka:
   client:
     #将此项目注册到Eureka服务
     register-with-eureka: true
     service-url:
-      defaultZone: http://${eurekaServer.user}:${eurekaServer.password}@${eurekaServer.host}:${eurekaServer.port}/eureka
+      defaultZone: http://${eurekaServer.user}:${eurekaServer.password}@${eurekaServer.host}:${eurekaServer.port1}/eureka,http://${eurekaServer.user}:${eurekaServer.password}@${eurekaServer.host}:${eurekaServer.port2}/eureka
 
 # feign开启Hystrix
 feign:

@@ -104,7 +104,7 @@ public class PurchaseInOrderController {
      */
     @GetMapping("selectPurchaseInOrderByPage")
     @RequiresPermissions("flow:purchaseInOrder:select")
-    @ApiOperation(value="查询采购入库单详情接口", notes="根据采购入库单id查询采购入库单详情")
+    @ApiOperation(value="查询采购入库单接口", notes="根据采购入库单id查询采购入库单")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "companyId", value = "企业id", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "pageNum", value = "要查看的页码，默认是1", required = false, dataType = "int"),

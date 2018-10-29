@@ -13,6 +13,11 @@ public class SaleOrderDetailVO extends Material {
 
 
     /**
+     * 物料id
+     */
+    private Integer materialId;
+
+    /**
      * 计量单位名称
      */
     private String unitName;

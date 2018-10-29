@@ -12,8 +12,9 @@
     <modules>
         <module>shianxian-trace</module>
         <module>shianxian-platform</module>
-        <module>shianxian-eureka</module>
         <module>shianxian-common</module>
+        <module>shianxian-eureka-two</module>
+        <module>shianxian-eureka-one</module>
     </modules>
 
     <parent>

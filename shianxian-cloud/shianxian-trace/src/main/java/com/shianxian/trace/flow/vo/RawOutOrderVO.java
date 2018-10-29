@@ -45,6 +45,11 @@ public class RawOutOrderVO extends Material {
     private Integer status = 3;
 
     /**
+     * 物料id
+     */
+    private Integer materialId;
+
+    /**
      * 计量单位名称
      */
     private String unitName;

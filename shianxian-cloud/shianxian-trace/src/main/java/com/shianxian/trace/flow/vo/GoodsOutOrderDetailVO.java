@@ -10,6 +10,10 @@ import lombok.Data;
 @Data
 public class GoodsOutOrderDetailVO {
 
+    /**
+     * 物料id
+     */
+    private Integer materialId;
 
     /**
      * 计量单位名称
