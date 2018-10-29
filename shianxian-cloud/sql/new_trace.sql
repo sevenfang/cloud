@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-10-26 18:00:54
+Date: 2018-10-29 17:20:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -110,7 +110,7 @@ CREATE TABLE `t_category` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='类别表';
 
 -- ----------------------------
 -- Table structure for t_company
@@ -199,6 +199,7 @@ CREATE TABLE `t_goods_out_order` (
   `sale_order_no` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '销售单号',
   `operator_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '操作员',
   `consigner_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '操作员',
+  `status` tinyint(1) DEFAULT NULL COMMENT '订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
@@ -218,7 +219,6 @@ CREATE TABLE `t_goods_out_order_detail` (
   `unit_id` int(10) DEFAULT NULL COMMENT '计量单位id',
   `goods_num` int(10) DEFAULT NULL COMMENT '商品出库数量',
   `goods_trace_code` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '商品追溯码',
-  `status` tinyint(1) DEFAULT NULL COMMENT '订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='商品出库单详情';
 
@@ -325,7 +325,7 @@ CREATE TABLE `t_purchase_in_order` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='采购入库单表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='采购入库单表';
 
 -- ----------------------------
 -- Table structure for t_purchase_in_order_detail
@@ -342,7 +342,7 @@ CREATE TABLE `t_purchase_in_order_detail` (
   `supplier_id` int(10) DEFAULT NULL COMMENT '供应商id',
   `quarantine_no` varchar(300) COLLATE utf8_bin DEFAULT NULL COMMENT '检疫证号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='采购入库详情表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='采购入库详情表';
 
 -- ----------------------------
 -- Table structure for t_raw_out_order
@@ -376,6 +376,7 @@ CREATE TABLE `t_sale_order` (
   `company_id` int(10) DEFAULT NULL COMMENT '企业id',
   `sale_order_no` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '销售单号',
   `sale_order_time` datetime DEFAULT NULL COMMENT '销售日期',
+  `status` tinyint(1) DEFAULT NULL COMMENT '订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_user` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
@@ -394,7 +395,6 @@ CREATE TABLE `t_sale_order_detail` (
   `category_id` int(10) DEFAULT NULL COMMENT '物料类别id',
   `unit_id` int(10) DEFAULT NULL COMMENT '计量单位id',
   `sale_num` int(10) DEFAULT NULL COMMENT '销售物料数量',
-  `status` tinyint(1) DEFAULT NULL COMMENT '订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='销售单详情';
 

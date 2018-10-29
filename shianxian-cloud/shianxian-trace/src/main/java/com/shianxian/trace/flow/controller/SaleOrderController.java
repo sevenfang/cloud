@@ -50,13 +50,13 @@ public class SaleOrderController {
             @ApiImplicitParam(paramType="header", name = "companyId", value = "企业id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "saleOrderNo", value = "销售单号", dataType = "String"),
             @ApiImplicitParam(paramType="header", name = "saleOrderTime", value = "销售单日期", dataType = "Date"),
+            @ApiImplicitParam(paramType="header", name = "status", value = "订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "id", value = "销售单详情id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "saleOrderId", value = "销售单id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int"),
-            @ApiImplicitParam(paramType="header", name = "saleNum", value = "销售物料数量", dataType = "int"),
-            @ApiImplicitParam(paramType="header", name = "status", value = "订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货", dataType = "int")
+            @ApiImplicitParam(paramType="header", name = "saleNum", value = "销售物料数量", dataType = "int")
     })
     public ResponseEntity<Object> saveOrUpdateSaleOrder(@RequestBody @Valid SaleOrder saleOrder, BindingResult result) {
         try {

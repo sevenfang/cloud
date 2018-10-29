@@ -54,13 +54,13 @@ public class GoodsOutOrderController {
             @ApiImplicitParam(paramType="header", name = "saleOrderNo", value = "销售单号", dataType = "String"),
             @ApiImplicitParam(paramType="header", name = "operatorUser", value = "操作员", dataType = "String"),
             @ApiImplicitParam(paramType="header", name = "consignerUser", value = "发货人", dataType = "String"),
+            @ApiImplicitParam(paramType="header", name = "status", value = "订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "id", value = "商品出库单详情id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "materialId", value = "物料id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "categoryId", value = "物料类别id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "unitId", value = "计量单位id", dataType = "int"),
             @ApiImplicitParam(paramType="header", name = "goodsNum", value = "商品出库数量", dataType = "int"),
-            @ApiImplicitParam(paramType="header", name = "goodsTraceCode", value = "商品追溯码", dataType = "String"),
-            @ApiImplicitParam(paramType="header", name = "status", value = "订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货", dataType = "int")
+            @ApiImplicitParam(paramType="header", name = "goodsTraceCode", value = "商品追溯码", dataType = "String")
     })
     public ResponseEntity<Object> saveOrUpdateGoodsOutOrder(@RequestBody @Valid GoodsOutOrder goodsOutOrder, BindingResult result) {
         try {

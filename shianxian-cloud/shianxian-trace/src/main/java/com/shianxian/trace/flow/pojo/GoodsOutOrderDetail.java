@@ -59,10 +59,4 @@ public class GoodsOutOrderDetail {
      */
     private String goodsTraceCode;
 
-    /**
-     * 订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货
-     */
-    @NotNull(message = "订单状态不能为空！")
-    private Integer status;
-
 }

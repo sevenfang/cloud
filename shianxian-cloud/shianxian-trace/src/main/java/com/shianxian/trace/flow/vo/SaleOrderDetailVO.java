@@ -32,8 +32,4 @@ public class SaleOrderDetailVO extends Material {
      */
     private Integer saleOrderDetailId;
 
-    /**
-     * 订单状态。1：待审核，2：已审核，3：未发货，4：已发货，5：已收货
-     */
-    private Integer status;
 }
